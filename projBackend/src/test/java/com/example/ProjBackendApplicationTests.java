@@ -8,7 +8,6 @@ class ProjBackendApplicationTests {
 
 	@Test
 	void contextLoads() {
-		sysout....
 	}
 
 }
