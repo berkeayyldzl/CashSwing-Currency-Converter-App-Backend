@@ -1,0 +1,58 @@
+// Package com.example
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "currencies") // Specify the MongoDB collection name
+public class Currency {
+
+    @Id
+    private String id; // MongoDB ObjectId
+
+    private String baseCurrency;
+    private String targetCurrency;
+    private double exchangeRate;
+
+    public Currency() {
+        // Default constructor needed for Spring Data MongoDB
+    }
+
+    public Currency(String baseCurrency, String targetCurrency, double exchangeRate) {
+        this.baseCurrency = baseCurrency;
+        this.targetCurrency = targetCurrency;
+        this.exchangeRate = exchangeRate;
+    }
+
+    // Getters and setters
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getBaseCurrency() {
+        return baseCurrency;
+    }
+
+    public void setBaseCurrency(String baseCurrency) {
+        this.baseCurrency = baseCurrency;
+    }
+
+    public String getTargetCurrency() {
+        return targetCurrency;
+    }
+
+    public void setTargetCurrency(String targetCurrency) {
+        this.targetCurrency = targetCurrency;
+    }
+
+    public double getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public void setExchangeRate(double exchangeRate) {
+        this.exchangeRate = exchangeRate;
+    }
+}
