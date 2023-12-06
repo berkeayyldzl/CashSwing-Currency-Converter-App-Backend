@@ -52,9 +52,6 @@ import org.springframework.web.bind.annotation.RestController;
 //import com.example.currencyExchangeServices;
 
 
-//mongo read tarzı bir şeyler yapmamız gerekiyor mu?
-//mongo read main  ve mongo write main?
-
 
 @RestController
 @RequestMapping("/api/exchangerates")
@@ -63,13 +60,29 @@ public class CurrencyExchangeController {
     
     @Autowired
     private CurrencyRepository currencyRepository;
-    
+    /*
     @GetMapping("/get/{mainCurrency}")
     public Currency getExchangeRates(@PathVariable String mainCurrency) {
         return currencyRepository.findByMainCurrency(mainCurrency);
         
     }
+	*/
+    @GetMapping("/get/{mainCurrency}")
+    public ResponseEntity<?> getExchangeRates(@PathVariable String mainCurrency) {
+        Currency currency = currencyRepository.findByMainCurrency(mainCurrency);
+        if (currency != null) {
+            return ResponseEntity.ok(currency);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No currency found for " + mainCurrency);
+        }
+    }
 
+    
+    
+    
+    
+    
+    
     @GetMapping("/getAllCurrencies")
     public List<Currency> getAllCurrencies() {
         return currencyRepository.findAll();
