@@ -49,6 +49,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.currencyExchangeService.currencyExchangeServices;
 
+//mongo read tarzı bir şeyler yapmamız gerekiyor mu?
+//mongo read main  ve mongo write main?
+
 
 @RestController
 @RequestMapping("/api/exchangerates")
@@ -56,20 +59,22 @@ public class CurrencyExchangeController {
 
     @Autowired
     private currencyExchangeServices currencyExchangeService;
-
+    @Autowired
+    private CurrencyRepository currencyRepository;
+    
     @GetMapping("/get/{baseCurrency}")
     public double getExchangeRates(@PathVariable String baseCurrency) {
-        return currencyExchangeService.getExchangeRates(baseCurrency);
+        return currencyRepository.findByBaseCurrency(baseCurrency);
     }
 
     @GetMapping("/getAllCurrencies")
     public List<Currency> getAllCurrencies() {
-        return currencyExchangeService.getAllCurrencies();
+        return currencyRepository.findAll();
     }
 
     @PostMapping("/save")
     public void saveCurrency(@RequestBody Currency currency) {
-        currencyExchangeService.saveCurrency(currency);
+        currencyRepository.save(currency);
     }
 }
 	

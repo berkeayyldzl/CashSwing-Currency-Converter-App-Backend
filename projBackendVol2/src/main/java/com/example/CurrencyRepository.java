@@ -8,7 +8,9 @@ public interface CurrencyRepository extends MongoRepository<Currency, String> {
 	
     double findByBaseCurrency(String mainCurrency);
     
-    Currency save(Currency currency);
+   
+   
+    //Currency save(Currency currency);
     	
     	
     

@@ -1,3 +1,4 @@
+
 package com.example;
 
 import java.util.ArrayList;
@@ -14,53 +15,22 @@ class currencyExchangeService extends Currency{
 		List<Currency> currencies = new ArrayList<>();
 		
 		@Autowired
-		private CurrencyRepository CurrencyRepository; // Assuming you have a CurrencyRepository
-
-		// Method to update exchange rates for a specific base currency
-		public void updateExchangeRates(String baseCurrency) {
-			// Implement your logic to update exchange rates for the provided baseCurrency
-			// This might involve fetching data from an external API and updating the repository
-			// Example:
-			// Call an external API to get updated rates
-			// Update the currencyRepository with the new rates for the provided baseCurrency
-			// currencyRepository.updateRatesForBaseCurrency(baseCurrency, newRates);
-		}
-    
-		
-		public void saveCurrency(Currency currency) {
-			
-			currencyRepository.save(currency);
 	
-		}
-		
-		public List<Currency> getAllCurrencies() {
-	        return currencyRepository.findAll();
-	    }
-		
-		@Autowired
 	    private CurrencyRepository currencyRepository;
 
 	    private List<Currency> currencyList = new ArrayList<>();
 
-	    public CurrencyExchangeService() {
-	        // Initialize the list when the service is created
-	        initCurrencyList();
-	    }
 
 	    private void initCurrencyList() {
 	        // Retrieve currencies from the repository and add them to the list
 	        currencyList.addAll(currencyRepository.findAll());
 	    }
 
-	    public ExchangeRate getExchangeRates(String baseCurrency) {
-	        Currency currency = findCurrencyByBaseAndTarget(baseCurrency, targetCurrency);
-	        if (currency == null) {
-	            // Handle scenario when rates are not found for the specified currencies
-	            return null;
-	        }
-	        return new ExchangeRate(currency.getBaseCurrency(), currency.getTargetCurrency(), currency.getExchangeRate());
+	    public double getExchangeRates(String baseCurrency) {
+	        double exchangeRate = currencyRepository.findByBaseCurrency(baseCurrency);
+	        return exchangeRate;
 	    }
-
+	    
 	    public Currency getCurrencyById(String id) {
 	        return currencyRepository.findById(id).orElse(null);
 	    }

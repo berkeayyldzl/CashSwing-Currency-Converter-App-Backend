@@ -11,7 +11,7 @@ public class ProjBackendVol2Application {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjBackendVol2Application.class, args);
 	}
-	
+	/*
 	@Override
     public void run(String... args) throws Exception {
         // Initialize sample data if the repository is empty
@@ -28,8 +28,9 @@ public class ProjBackendVol2Application {
         
         
     }
+    */
 }
 
-}
+
 
 
