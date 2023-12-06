@@ -1,23 +1,22 @@
 package com.example;
 
-//Package com.example
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document (collection = "exchange_rates")// Specify the MongoDB collection name
+@Document (collection = "exchange_rates")// The MongoDB collection name.
 public class Currency {
 
  @Id
- private String id; // MongoDB ObjectId 01     does mongo db accept string;
-
- private String mainCurrency; //try/eur     
- private String currencyImage; //the name of the image
- private double exchangeRate; //0.032
- private double max;
- private double min;
+ private String id; // The id of the currency.
+ private String mainCurrency; // The name of the currency.
+ private String currencyImage; // The name of the image file.
+ private double exchangeRate; // The numerical value of the exchange rate of the currency.
+ private double max; // The maximum value of the currency in the 5 year period.
+ private double min; // The minimum value of the currency in the 5 year period.
  
  public Currency() {
-     // Default constructor needed for Spring Data MongoDB
+     // Default constructor for the Currency class.
  }
 
  public Currency(String Currency, double exchangeRate,String currencyImage,double max, double min) {
@@ -26,9 +25,10 @@ public class Currency {
      this.currencyImage = currencyImage;
      this.max = max;
      this.min = min;
+     // Parameterized constructor for the Currency class.
  }
 
- // Getters and setters
+ // Getters and setters of the respecting fields of the Currency class.
 
  public String getId() {
      return id;

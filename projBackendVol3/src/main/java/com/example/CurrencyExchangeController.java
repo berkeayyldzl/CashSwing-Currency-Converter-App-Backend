@@ -1,47 +1,8 @@
-
-/*
-package com.example;
-//package com.example.demo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
-	@RestController
-	@RequestMapping("/api/exchangerates")
-	public class CurrencyExchangeController {
-
-	// File: com.example.demo.CurrencyExchangeController.java
-	    @Autowired
-	    private CurrencyExchangeService currencyExchangeService;
-
-	    @GetMapping("/get/{baseCurrency}")
-	    public ExchangeRate getExchangeRates(@PathVariable String baseCurrency) {
-	        return currencyExchangeService.getExchangeRates(baseCurrency);
-	    }
-
-	    @GetMapping("/update/{baseCurrency}")
-	    public void updateExchangeRates(@PathVariable String baseCurrency) {
-	        currencyExchangeService.updateExchangeRates(baseCurrency);
-	    }
-	    
-	    
-	    //.save();
-	    //GetMapping
-	    //PostMapping
-	    
-	}
-
-*/	
-	
-	// src/main/java/com/example/CurrencyExchangeController.java
 package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;//dikkat
-import org.springframework.http.ResponseEntity; //dikkat
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,26 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//import com.example.currencyExchangeServices;
-
-
-
 @RestController
-@RequestMapping("/api/exchangerates")
+@RequestMapping("/api/exchangerates") // The adress of the api.
+
 public class CurrencyExchangeController {
 
-    
     @Autowired
-    private CurrencyRepository currencyRepository;
-    /*
+    private CurrencyRepository currencyRepository; // CurrencyRepository object for calling the methods.
+    
     @GetMapping("/get/{mainCurrency}")
-    public Currency getExchangeRates(@PathVariable String mainCurrency) {
-        return currencyRepository.findByMainCurrency(mainCurrency);
-        
-    }
-	*/
-    @GetMapping("/get/{mainCurrency}")
-    public ResponseEntity<?> getExchangeRates(@PathVariable String mainCurrency) {
+    public ResponseEntity<?> getExchangeRates(@PathVariable String mainCurrency) { // Returns the following depending the result of the method.
         Currency currency = currencyRepository.findByMainCurrency(mainCurrency);
         if (currency != null) {
             return ResponseEntity.ok(currency);
@@ -77,24 +28,13 @@ public class CurrencyExchangeController {
         }
     }
 
-    
-    
-    
-    
-    
-    
     @GetMapping("/getAllCurrencies")
-    public List<Currency> getAllCurrencies() {
+    public List<Currency> getAllCurrencies() { // Outputs all the Currency objects in the database.
         return currencyRepository.findAll();
         
     }
-    /*
-    @PostMapping("/save")
-    public void saveCurrency(@RequestBody Currency currency) {
-        currencyRepository.save(currency);
-    }
-    */
-    @PostMapping("/save")
+    
+    @PostMapping("/save") // Takes a Currency object in json format, uploads to the database. If not successfull, throws an error.
     public ResponseEntity<String> saveCurrency(@RequestBody Currency currency) {
         try {
             currencyRepository.save(currency);
