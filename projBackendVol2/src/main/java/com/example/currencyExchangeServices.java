@@ -1,35 +1,95 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class currencyExchangeServices {
+class currencyExchangeService extends Currency{
 
-    @Autowired
-    private CurrencyRepository currencyRepository; // Assuming you have a CurrencyRepository
+	@Service
+	public class currencyExchangeServices { 
+		
+		List<Currency> currencies = new ArrayList<>();
+		
+		@Autowired
+		private CurrencyRepository CurrencyRepository; // Assuming you have a CurrencyRepository
 
-    // Method to retrieve exchange rates for a specific base currency
-    public ExchangeRate getExchangeRates(String baseCurrency) {
-        // Implement your logic to fetch exchange rates from the repository based on the provided baseCurrency
-        Currency currency = currencyRepository.findByBaseCurrency(baseCurrency); // Example method, adjust based on your repository structure
-        if(currency == null) {
-            // Handle scenario when rates are not found for the base currency
-            return null;
-        }
-        return new ExchangeRate(currency.getBaseCurrency(), currency.getTargetCurrency(), currency.getExchangeRate());
-    }
+		// Method to update exchange rates for a specific base currency
+		public void updateExchangeRates(String baseCurrency) {
+			// Implement your logic to update exchange rates for the provided baseCurrency
+			// This might involve fetching data from an external API and updating the repository
+			// Example:
+			// Call an external API to get updated rates
+			// Update the currencyRepository with the new rates for the provided baseCurrency
+			// currencyRepository.updateRatesForBaseCurrency(baseCurrency, newRates);
+		}
+    
+		
+		public void saveCurrency(Currency currency) {
+			
+			currencyRepository.save(currency);
+	
+		}
+		
+		public List<Currency> getAllCurrencies() {
+	        return currencyRepository.findAll();
+	    }
+		
+		@Autowired
+	    private CurrencyRepository currencyRepository;
 
-    // Method to update exchange rates for a specific base currency
-    public void updateExchangeRates(String baseCurrency) {
-        // Implement your logic to update exchange rates for the provided baseCurrency
-        // This might involve fetching data from an external API and updating the repository
-        // Example:
-        // Call an external API to get updated rates
-        // Update the currencyRepository with the new rates for the provided baseCurrency
-        // currencyRepository.updateRatesForBaseCurrency(baseCurrency, newRates);
-    }
-}
+	    private List<Currency> currencyList = new ArrayList<>();
+
+	    public CurrencyExchangeService() {
+	        // Initialize the list when the service is created
+	        initCurrencyList();
+	    }
+
+	    private void initCurrencyList() {
+	        // Retrieve currencies from the repository and add them to the list
+	        currencyList.addAll(currencyRepository.findAll());
+	    }
+
+	    public ExchangeRate getExchangeRates(String baseCurrency) {
+	        Currency currency = findCurrencyByBaseAndTarget(baseCurrency, targetCurrency);
+	        if (currency == null) {
+	            // Handle scenario when rates are not found for the specified currencies
+	            return null;
+	        }
+	        return new ExchangeRate(currency.getBaseCurrency(), currency.getTargetCurrency(), currency.getExchangeRate());
+	    }
+
+	    public Currency getCurrencyById(String id) {
+	        return currencyRepository.findById(id).orElse(null);
+	    }
+
+	    public void saveCurrency(Currency currency) {
+	        currencyRepository.save(currency);
+	        // Update the list when a new currency is added
+	        currencyList.add(currency);
+	    }
+
+	    public List<Currency> getAllCurrencies() {
+	        return currencyList;
+	    }
+
+	    // Add other methods as needed
+	}
+		
+    
+    
+	   
+    
+}    
+    
+    
+    
+    
+    
+    
+
 
 //bir kur seç
 //dolae / tl

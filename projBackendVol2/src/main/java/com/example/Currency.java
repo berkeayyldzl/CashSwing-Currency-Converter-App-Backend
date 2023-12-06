@@ -8,11 +8,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Currency {
 
  @Id
- private static int id; // MongoDB ObjectId 01
+ private String id; // MongoDB ObjectId 01     does mongo db accept string;
 
- private static String mainCurrency; //try/eur
+ private String mainCurrency; //try/eur     
  
- private static double exchangeRate; //0.032
+ private double exchangeRate; //0.032
 
  public Currency() {
      // Default constructor needed for Spring Data MongoDB
@@ -25,11 +25,11 @@ public class Currency {
 
  // Getters and setters
 
- public int getId() {
+ public String getId() {
      return id;
  }
  
- public void setId(int id) {
+ public void setId(String id) {
      this.id = id;
  }
 
