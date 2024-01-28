@@ -7,3 +7,5 @@ This term project is the result of the collaboration and team work between 4 jun
 Post and Get methods are used in the program to insert and pull the currencies to the Mongo database. Later the backend part is merged with frontend, which uses android to show the elements to the user.
 
 For the full description and the proposal of the project, please refer to the [Project Proposal.pdf](Project_Proposal.pdf)
+
+For the full report and the workings of the project, please refer to the [Project Report.pdf](Project_Backend_Report.pdf)
