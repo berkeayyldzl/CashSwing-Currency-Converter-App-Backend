@@ -6,4 +6,4 @@ This term project is the result of the collaboration and team work between 4 jun
 "Cash Swing" is an app that holds the currency informations and shows them to the user when prompted. The backend part is written on java, utilizing Spring Framework to connect and communicate between MongoDB.
 Post and Get methods are used in the program to insert and pull the currencies to the Mongo database. Later the backend part is merged with frontend, which uses android to show the elements to the user.
 
-For the full description and the proposal of the project, please refer to the [Project Proposal.pdf](Project Proposal.pdf)
+For the full description and the proposal of the project, please refer to the [Project Proposal.pdf](Project_Proposal.pdf)
